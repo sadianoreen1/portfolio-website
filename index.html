@@ -1014,9 +1014,9 @@
                             <form id="contact-form">
 
                                 <div class="mb-4">
-                                    <label>Your Name:</label>
-                                    <input type="text" name="name" class="form-control" placeholder="e.g. Sadia Noreen"
-                                        required>
+                                    <label>Your Name:
+                                        <input type="text" name="name" class="form-control"
+                                            placeholder="e.g. Sadia Noreen" required></label>
                                 </div>
 
                                 <div class="mb-4">
@@ -1088,36 +1088,47 @@
                 behavior: "smooth"
             });
         });
-
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
         // emiljs
         src = "https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" >
+            document.addEventListener("DOMContentLoaded", function () {
 
-            emailjs.init("2y4hfvoO75kPbEWQ6");
-        document.getElementById("contact-form").addEventListener("submit", function (e) {
+                console.log("JS Loaded");
 
-            e.preventDefault();
-            console.log("Form submitted");
-            emailjs.sendForm(
-                "service_nw910cq",
-                "template_g7jym5h",
-                this
-            )
-                .then(function () {
+                emailjs.init({
+                    publicKey: "2y4hfvoO75kPbEWQ6",
+                });
 
-                    alert("Your message has been sent successfully!");
+                const form = document.getElementById("contact-form");
 
-                    document.getElementById("contact-form").reset();
+                console.log(form);
 
-                })
-                .catch(function (error) {
+                form.addEventListener("submit", function (e) {
 
-                    alert("Failed to send message.");
+                    e.preventDefault();
 
-                    console.log(error);
+                    console.log("Form Submitted");
+
+                    emailjs.sendForm(
+                        "service_nw910cq",
+                        "template_g7jym5h",
+                        this
+                    )
+                        .then(function (response) {
+                            console.log("SUCCESS!", response);
+                            alert("Message Sent!");
+                            form.reset();
+                        })
+                        .catch(function (error) {
+                            console.error("FAILED...", error);
+                            alert("Error sending message");
+                        });
 
                 });
 
-        });
+            });
     </script>
 </body>
 

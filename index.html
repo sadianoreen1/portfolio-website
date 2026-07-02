@@ -111,6 +111,15 @@
             color: #A39382;
         }
 
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #FBF7F4;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
         /* home section */
         #home {
             align-items: center;
@@ -742,6 +751,190 @@
         #scroll-top i {
             font-size: 22px;
         }
+
+        /* ============================================= */
+        /* RESPONSIVE OVERRIDES — only apply below 991px  */
+        /* Desktop/laptop styles above are untouched      */
+        /* ============================================= */
+        @media (max-width: 991.98px) {
+
+            /* ---- nav / hamburger menu ---- */
+            nav {
+                justify-content: space-between;
+                padding: 0 20px;
+                position: relative;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            nav .right {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: #302d2d;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 0;
+                z-index: 1000;
+                padding-bottom: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+            }
+
+            nav .right.nav-open {
+                display: flex;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 12px 0;
+                text-align: center;
+            }
+
+            /* ---- home section ---- */
+            #home {
+                padding: 60px 20px 0;
+                margin-top: 0;
+            }
+
+            #home .row {
+                flex-direction: column;
+            }
+
+            .h-text {
+                width: 100%;
+                flex: 0 0 100%;
+                max-width: 100%;
+                text-align: center;
+                margin-top: 30px;
+            }
+
+            .h-image {
+                width: 500px;
+                zoom: 0.7;
+                flex: 0 0 100%;
+                margin: 40px auto 0;
+            }
+
+            /* ---- about section ---- */
+            #about .row {
+                flex-direction: column;
+            }
+
+            .a-image {
+                flex: 0 0 100%;
+                max-width: 350px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .a-picture {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 5 / 7;
+            }
+
+            .a-text {
+                flex: 0 0 100%;
+                max-width: 100%;
+                width: 100%;
+                text-align: center;
+                margin-top: 40px;
+                margin-left: 0;
+                padding: 0 20px;
+            }
+
+            /* ---- skills section ---- */
+            #s-text {
+                margin-top: 40px;
+                text-align: center;
+            }
+
+            .s-circle {
+                margin-top: 40px;
+            }
+
+            /* ---- education section ---- */
+            .education {
+                width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                margin: 40px auto;
+            }
+
+            .e-text .divider {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .line-item {
+                padding-left: 45px;
+            }
+
+            /* ---- projects section ---- */
+            .pr-card {
+                width: 100%;
+                height: auto;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* ---- contact section ---- */
+            .c-text {
+                margin-left: 0;
+                margin-top: 40px;
+                text-align: center;
+                padding: 0 20px;
+            }
+
+            .c-form {
+                width: 100%;
+                max-width: 500px;
+                margin: 30px auto;
+            }
+
+            .c-image {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+
+            .SN1 {
+                font-size: 36px;
+            }
+
+            .h-image {
+                zoom: 0.56;
+            }
+
+            .a-image {
+                max-width: 280px;
+            }
+
+            .e-text .divider {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .pr-content {
+                padding: 20px;
+            }
+
+            .c-form {
+                padding: 25px;
+            }
+        }
     </style>
 </head>
 
@@ -750,6 +943,9 @@
     <header>
         <nav>
             <div class="left">seenoon</div>
+            <button id="navToggle" class="nav-toggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <div class="right text-end">
                 <ul>
                     <li><a href="#home" class="active">Home</a></li>
@@ -1069,6 +1265,22 @@
     <button id="scroll-top" class="visible"><i class="fa-solid fa-arrow-up"></i></button>
 
 
+    <script>
+        // mobile nav toggle
+        const navToggle = document.getElementById("navToggle");
+        const navRight = document.querySelector("nav .right");
+
+        navToggle.addEventListener("click", () => {
+            navRight.classList.toggle("nav-open");
+        });
+
+        // close mobile menu when a link is clicked
+        navRight.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navRight.classList.remove("nav-open");
+            });
+        });
+    </script>
     <script>
         //  script scroll to top 
 
